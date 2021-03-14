@@ -44,6 +44,7 @@ theme.spr_very_small                            = theme.icon_dir .. "/spr_very_s
 theme.spr_right                                 = theme.icon_dir .. "/spr_right.png"
 theme.spr_bottom_right                          = theme.icon_dir .. "/spr_bottom_right.png"
 theme.spr_left                                  = theme.icon_dir .. "/spr_left.png"
+theme.spr_empty                                 = theme.icon_dir .. "/spr_empty.png"
 theme.bar                                       = theme.icon_dir .. "/bar.png"
 theme.bottom_bar                                = theme.icon_dir .. "/bottom_bar.png"
 theme.mpdl                                      = theme.icon_dir .. "/widget/mpd.png"
@@ -263,6 +264,7 @@ local spr_very_small = wibox.widget.imagebox(theme.spr_very_small)
 local spr_right = wibox.widget.imagebox(theme.spr_right)
 local spr_bottom_right = wibox.widget.imagebox(theme.spr_bottom_right)
 local spr_left = wibox.widget.imagebox(theme.spr_left)
+local spr_empty = wibox.widget.imagebox(theme.spr_empty)
 local bar = wibox.widget.imagebox(theme.bar)
 local bottom_bar = wibox.widget.imagebox(theme.bottom_bar)
 
@@ -364,18 +366,18 @@ function theme.at_screen_connect(s)
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             first,
+            spr_empty,
+            spr_bottom_right,
             s.mytag,
             spr_small,
             s.mylayoutbox,
             spr_small,
             s.mypromptbox,
         },
-	nil,-- Middle widget 
+	    nil,-- Middle widget 
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
-            --theme.mail.widget,
-            --bat.widget,
             spr_right,
 	        cpu_icon,
             cpuwidget,
@@ -390,6 +392,7 @@ function theme.at_screen_connect(s)
             networkwidget,
             netup_icon,
 	        spr_left,
+            spr_empty,
         },
     }
 
@@ -402,6 +405,7 @@ function theme.at_screen_connect(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
+            spr_empty,
             mylauncher,
         },
         s.mytasklist, -- Middle widget
@@ -425,6 +429,7 @@ function theme.at_screen_connect(s)
 	        clock_icon,
             clockwidget,
 	        spr_bottom_left,
+            spr_empty,
         },
     }
 end
