@@ -16,8 +16,8 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
 theme.default_dir                               = require("awful.util").get_themes_dir() .. "default"
-theme.icon_dir                                  = os.getenv("HOME") .. "/.config/awesome/mi_tema/icons"
-theme.wallpaper                                 = os.getenv("HOME") .. "/.config/awesome/mi_tema/wallpapers/abstract.png"
+theme.icon_dir                                  = os.getenv("HOME") .. "/.config/awesome/Darkness/icons"
+theme.wallpaper                                 = os.getenv("HOME") .. "/.config/awesome/Darkness/wallpapers/abstract.png"
 theme.font                                      = "Roboto Bold 10"
 theme.taglist_font                              = "Roboto Condensed Regular 8"
 theme.fg_normal                                 = "#FFFFFF"
@@ -46,33 +46,38 @@ theme.spr_bottom_right                          = theme.icon_dir .. "/spr_bottom
 theme.spr_left                                  = theme.icon_dir .. "/spr_left.png"
 theme.bar                                       = theme.icon_dir .. "/bar.png"
 theme.bottom_bar                                = theme.icon_dir .. "/bottom_bar.png"
-theme.mpdl                                      = theme.icon_dir .. "/mpd.png"
+theme.mpdl                                      = theme.icon_dir .. "/widget/mpd.png"
 theme.mpd_on                                    = theme.icon_dir .. "/mpd_on.png"
-theme.prev                                      = theme.icon_dir .. "/prev.png"
-theme.nex                                       = theme.icon_dir .. "/next.png"
-theme.stop                                      = theme.icon_dir .. "/stop.png"
-theme.pause                                     = theme.icon_dir .. "/pause.png"
-theme.play                                      = theme.icon_dir .. "/play.png"
-theme.clock                                     = theme.icon_dir .. "/clock.png"
-theme.calendar                                  = theme.icon_dir .. "/cal.png"
-theme.cpu                                       = theme.icon_dir .. "/cpu.png"
-theme.mem                                       = theme.icon_dir .. "/mem.png"
-theme.temp                                      = theme.icon_dir .. "/temp.png"
-theme.disk                                      = theme.icon_dir .. "/disk.png"
-theme.net_up                                    = theme.icon_dir .. "/net_up.png"
-theme.net_down                                  = theme.icon_dir .. "/net_down.png"
-theme.layout_tile                               = theme.icon_dir .. "/tile.png"
-theme.layout_tileleft                           = theme.icon_dir .. "/tileleft.png"
-theme.layout_tilebottom                         = theme.icon_dir .. "/tilebottom.png"
-theme.layout_tiletop                            = theme.icon_dir .. "/tiletop.png"
-theme.layout_fairv                              = theme.icon_dir .. "/fairv.png"
-theme.layout_fairh                              = theme.icon_dir .. "/fairh.png"
-theme.layout_spiral                             = theme.icon_dir .. "/spiral.png"
-theme.layout_dwindle                            = theme.icon_dir .. "/dwindle.png"
-theme.layout_max                                = theme.icon_dir .. "/max.png"
-theme.layout_fullscreen                         = theme.icon_dir .. "/fullscreen.png"
-theme.layout_magnifier                          = theme.icon_dir .. "/magnifier.png"
-theme.layout_floating                           = theme.icon_dir .. "/floating.png"
+theme.prev                                      = theme.icon_dir .. "/widget/prev.png"
+theme.nex                                       = theme.icon_dir .. "/widget/next.png"
+theme.stop                                      = theme.icon_dir .. "/widget/stop.png"
+theme.pause                                     = theme.icon_dir .. "/widget/pause.png"
+theme.play                                      = theme.icon_dir .. "/widget/play.png"
+theme.clock                                     = theme.icon_dir .. "/widget/clock.png"
+theme.calendar                                  = theme.icon_dir .. "/widget/cal.png"
+theme.cpu                                       = theme.icon_dir .. "/widget/cpu.png"
+theme.mem                                       = theme.icon_dir .. "/widget/mem.png"
+theme.temp                                      = theme.icon_dir .. "/widget/temp.png"
+theme.disk                                      = theme.icon_dir .. "/widget/disk.png"
+theme.net_up                                    = theme.icon_dir .. "/widget/net_up.png"
+theme.net_down                                  = theme.icon_dir .. "/widget/net_down.png"
+theme.layout_tile                               = theme.icon_dir .. "/layout/tile.png"
+theme.layout_tileleft                           = theme.icon_dir .. "/layout/tileleft.png"
+theme.layout_tilebottom                         = theme.icon_dir .. "/layout/tilebottom.png"
+theme.layout_tiletop                            = theme.icon_dir .. "/layout/tiletop.png"
+theme.layout_fairv                              = theme.icon_dir .. "/layout/fairv.png"
+theme.layout_fairh                              = theme.icon_dir .. "/layout/fairh.png"
+theme.layout_spiral                             = theme.icon_dir .. "/layout/spiral.png"
+theme.layout_dwindle                            = theme.icon_dir .. "/layout/dwindle.png"
+theme.layout_max                                = theme.icon_dir .. "/layout/max.png"
+theme.layout_magnifier                          = theme.icon_dir .. "/layout/magnifier.png"
+theme.layout_floating                           = theme.icon_dir .. "/layout/floating.png"
+theme.tag_term                                  = theme.icon_dir .. "/tag/terminal.png"
+theme.tag_dev                                   = theme.icon_dir .. "/tag/dev.png"
+theme.tag_docs                                  = theme.icon_dir .. "/tag/docs.png"
+theme.tag_web                                   = theme.icon_dir .. "/tag/web.png"
+theme.tag_music                                 = theme.icon_dir .. "/tag/music.png"
+theme.tag_other                                 = theme.icon_dir .. "/tag/other.png"
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = true
 theme.useless_gap                               = dpi(4)
@@ -181,18 +186,6 @@ function ()
     theme.mpd.update()
 end)))
 
--- Battery
-local bat = lain.widget.bat({
-    settings = function()
-        bat_header = " Bat "
-        bat_p      = bat_now.perc .. " "
-        if bat_now.ac_status == 1 then
-            bat_p = bat_p .. "Plugged "
-        end
-        widget:set_markup(markup.font(theme.font, markup(blue, bat_header) .. bat_p))
-    end
-})
-
 -- / fs
 --[[ commented because it needs Gio/Glib >= 2.54
 theme.fs = lain.widget.fs({
@@ -259,12 +252,6 @@ local net = lain.widget.net({
 local netbg = wibox.container.background(net.widget, theme.bg_focus, gears.shape.rectangle)
 local networkwidget = wibox.container.margin(netbg, dpi(0), dpi(0), dpi(5), dpi(5))
 
--- Weather
-theme.weather = lain.widget.weather({
-    city_id = 2643743, -- placeholder (London)
-    notification_preset = { font = "Monospace 9", position = "bottom_right" },
-})
-
 -- Launcher
 local mylauncher = awful.widget.button({ image = theme.awesome_icon_launcher })
 mylauncher:connect_signal("button::press", function() awful.util.mymainmenu:toggle() end)
@@ -297,8 +284,56 @@ function theme.at_screen_connect(s)
     end
     gears.wallpaper.maximized(wallpaper, s, true)
 
+    --Layouts
+
+    awful.layout.layouts = {
+        awful.layout.suit.tile,         --1
+        awful.layout.suit.floating,     --2
+        awful.layout.suit.spiral,       --3
+        awful.layout.suit.max,          --4
+        --awful.layout.suit.tile.left,
+        --awful.layout.suit.tile.bottom,
+        --awful.layout.suit.tile.top,
+        --awful.layout.suit.fair,
+        --awful.layout.suit.fair.horizontal,
+        --awful.layout.suit.spiral.dwindle,
+        --awful.layout.suit.max.fullscreen,
+        --awful.layout.suit.magnifier,
+        --awful.layout.suit.corner.nw,
+        --awful.layout.suit.corner.ne,
+        --awful.layout.suit.corner.sw,
+        --awful.layout.suit.corner.se,
+        --lain.layout.cascade,
+        --lain.layout.cascade.tile,
+        --lain.layout.centerwork,
+        --lain.layout.centerwork.horizontal,
+        --lain.layout.termfair,
+        --lain.layout.termfair.center,
+    }
+
     -- Tags
-    awful.tag(awful.util.tagnames, s, awful.layout.layouts)
+
+    local tags = {
+        names ={ "TERM", "DEV", "DOCS", "WEB", "MUSIC" , "OTRO" },
+        icons = {theme.tag_term, theme.tag_dev, theme.tag_docs, theme.tag_web, theme.tag_music, theme.tag_other},
+    }
+    
+    awful.util.tagnames = tags.names
+    
+    --[[ Without icons
+    awful.tag(awful.util.tagnames, s, awful.layout.layouts[1])
+    --]]
+
+    --{{ With icons
+
+        for i,v in ipairs(tags.icons) do
+            awful.tag.add( "", {
+                icon = v,
+                layout = awful.layout.layouts[1],
+                screen = s,
+            })
+        end
+    --}}
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
