@@ -1,7 +1,7 @@
 --[[
 
-     Holo Awesome WM theme 3.0
-     github.com/lcpz
+     Darkness Awesome WM theme 
+     github.com/tin-gprieto
 
 --]]
 

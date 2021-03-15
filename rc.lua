@@ -1,7 +1,7 @@
 --[[
 
-     Awesome WM configuration template
-     github.com/lcpz
+    Configuración template Awesome WM 
+    github.com/tin-gprieto
 
 --]]
 
