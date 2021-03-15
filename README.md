@@ -69,6 +69,8 @@ Libreria de widgets: https://github.com/streetturtle/awesome-wm-widgets
 
 - Arreglar widget de temperatura del procesador
 
+- Arreglar widget de bateria (icons)
+
 - Arreglar ventanas (opción redimensionar y anclar/desanclar)
 
 - Modificar íconos
