@@ -57,6 +57,8 @@ Libreria de widgets: https://github.com/streetturtle/awesome-wm-widgets
 
 - Alinear e independizar Spotify widget
 
+- Achicar notificación de canción de Spotify
+
 ### Arreglar
 
 - Widget del porcentaje ocupado del disco (top wibox)
