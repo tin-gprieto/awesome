@@ -11,15 +11,25 @@ local awful = require("awful")
 local wibox = require("wibox")
 local dpi   = require("beautiful.xresources").apply_dpi
 
+local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
+local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
+local battery_widget = require("awesome-wm-widgets.battery-widget.battery") --sudo install acpi
+
 local string, os = string, os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
 theme.default_dir                               = require("awful.util").get_themes_dir() .. "default"
 theme.icon_dir                                  = os.getenv("HOME") .. "/.config/awesome/Darkness/icons"
+theme.widget_dir                                = theme.icon_dir .. "/widget"
+theme.layout_dir                                = theme.icon_dir .. "/layout"
+theme.tag_dir                                   = theme.icon_dir .. "/tag"
+theme.battery_dir                               = theme.icon_dir .. "/battery_status"
 theme.wallpaper                                 = os.getenv("HOME") .. "/.config/awesome/Darkness/wallpapers/abstract.png"
 theme.font                                      = "Roboto Bold 10"
-theme.taglist_font                              = "Roboto Condensed Regular 8"
+theme.widget_font                               = "Roboto Bold 8"
+theme.calendar_font                             = "Monospace 10"
+theme.taglist_font                              = "Roboto Condensed Regular 10"
 theme.fg_normal                                 = "#FFFFFF"
 theme.fg_focus                                  = "#0099CC"
 theme.bg_focus                                  = "#303030"
@@ -45,158 +55,86 @@ theme.spr_right                                 = theme.icon_dir .. "/spr_right.
 theme.spr_bottom_right                          = theme.icon_dir .. "/spr_bottom_right.png"
 theme.spr_left                                  = theme.icon_dir .. "/spr_left.png"
 theme.spr_empty                                 = theme.icon_dir .. "/spr_empty.png"
+theme.spr_middle                                = theme.icon_dir .. "/spr_middle.png"
 theme.bar                                       = theme.icon_dir .. "/bar.png"
 theme.bottom_bar                                = theme.icon_dir .. "/bottom_bar.png"
-theme.mpdl                                      = theme.icon_dir .. "/widget/mpd.png"
-theme.mpd_on                                    = theme.icon_dir .. "/mpd_on.png"
-theme.prev                                      = theme.icon_dir .. "/widget/prev.png"
-theme.nex                                       = theme.icon_dir .. "/widget/next.png"
-theme.stop                                      = theme.icon_dir .. "/widget/stop.png"
-theme.pause                                     = theme.icon_dir .. "/widget/pause.png"
-theme.play                                      = theme.icon_dir .. "/widget/play.png"
-theme.clock                                     = theme.icon_dir .. "/widget/clock.png"
-theme.calendar                                  = theme.icon_dir .. "/widget/cal.png"
-theme.cpu                                       = theme.icon_dir .. "/widget/cpu.png"
-theme.mem                                       = theme.icon_dir .. "/widget/mem.png"
-theme.temp                                      = theme.icon_dir .. "/widget/temp.png"
-theme.disk                                      = theme.icon_dir .. "/widget/disk.png"
-theme.net_up                                    = theme.icon_dir .. "/widget/net_up.png"
-theme.net_down                                  = theme.icon_dir .. "/widget/net_down.png"
-theme.layout_tile                               = theme.icon_dir .. "/layout/tile.png"
-theme.layout_tileleft                           = theme.icon_dir .. "/layout/tileleft.png"
-theme.layout_tilebottom                         = theme.icon_dir .. "/layout/tilebottom.png"
-theme.layout_tiletop                            = theme.icon_dir .. "/layout/tiletop.png"
-theme.layout_fairv                              = theme.icon_dir .. "/layout/fairv.png"
-theme.layout_fairh                              = theme.icon_dir .. "/layout/fairh.png"
-theme.layout_spiral                             = theme.icon_dir .. "/layout/spiral.png"
-theme.layout_dwindle                            = theme.icon_dir .. "/layout/dwindle.png"
-theme.layout_max                                = theme.icon_dir .. "/layout/max.png"
-theme.layout_magnifier                          = theme.icon_dir .. "/layout/magnifier.png"
-theme.layout_floating                           = theme.icon_dir .. "/layout/floating.png"
-theme.tag_term                                  = theme.icon_dir .. "/tag/terminal.png"
-theme.tag_dev                                   = theme.icon_dir .. "/tag/dev.png"
-theme.tag_docs                                  = theme.icon_dir .. "/tag/docs.png"
-theme.tag_web                                   = theme.icon_dir .. "/tag/web.png"
-theme.tag_music                                 = theme.icon_dir .. "/tag/music.png"
-theme.tag_other                                 = theme.icon_dir .. "/tag/other.png"
+theme.spotify_play                              = theme.widget_dir .. "/spotify_play.png"
+theme.spotify_pause                             = theme.widget_dir .. "/spotify_pause.png"
+theme.vol                                       = theme.widget_dir .. "/vol.png"
+theme.net                                       = theme.widget_dir .. "/net.png"
+theme.clock                                     = theme.widget_dir .. "/clock.png"
+theme.calendar                                  = theme.widget_dir .. "/cal.png"
+theme.cpu                                       = theme.widget_dir .. "/cpu.png"
+theme.mem                                       = theme.widget_dir .. "/mem.png"
+theme.temp                                      = theme.widget_dir .. "/temp.png"
+theme.disk                                      = theme.widget_dir .. "/disk.png"
+theme.net_up                                    = theme.widget_dir .. "/net_up.png"
+theme.net_down                                  = theme.widget_dir .. "/net_down.png"
+theme.layout_tile                               = theme.layout_dir .. "/tile.png"
+theme.layout_tileleft                           = theme.layout_dir .. "/tileleft.png"
+theme.layout_tilebottom                         = theme.layout_dir .. "/tilebottom.png"
+theme.layout_tiletop                            = theme.layout_dir .. "/tiletop.png"
+theme.layout_fairv                              = theme.layout_dir .. "/fairv.png"
+theme.layout_fairh                              = theme.layout_dir .. "/fairh.png"
+theme.layout_spiral                             = theme.layout_dir .. "/spiral.png"
+theme.layout_dwindle                            = theme.layout_dir .. "/dwindle.png"
+theme.layout_max                                = theme.layout_dir .. "/max.png"
+theme.layout_magnifier                          = theme.layout_dir .. "/magnifier.png"
+theme.layout_floating                           = theme.layout_dir .. "/floating.png"
+theme.tag_term                                  = theme.tag_dir .. "/terminal.png"
+theme.tag_dev                                   = theme.tag_dir .. "/dev.png"
+theme.tag_docs                                  = theme.tag_dir .. "/docs.png"
+theme.tag_web                                   = theme.tag_dir .. "/web.png"
+theme.tag_music                                 = theme.tag_dir .. "/music.png"
+theme.tag_other                                 = theme.tag_dir .. "/other.png"
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = true
 theme.useless_gap                               = dpi(4)
-theme.titlebar_close_button_normal              = theme.default_dir.."/titlebar/close_normal.png"
-theme.titlebar_close_button_focus               = theme.default_dir.."/titlebar/close_focus.png"
-theme.titlebar_minimize_button_normal           = theme.default_dir.."/titlebar/minimize_normal.png"
-theme.titlebar_minimize_button_focus            = theme.default_dir.."/titlebar/minimize_focus.png"
-theme.titlebar_ontop_button_normal_inactive     = theme.default_dir.."/titlebar/ontop_normal_inactive.png"
-theme.titlebar_ontop_button_focus_inactive      = theme.default_dir.."/titlebar/ontop_focus_inactive.png"
-theme.titlebar_ontop_button_normal_active       = theme.default_dir.."/titlebar/ontop_normal_active.png"
-theme.titlebar_ontop_button_focus_active        = theme.default_dir.."/titlebar/ontop_focus_active.png"
-theme.titlebar_sticky_button_normal_inactive    = theme.default_dir.."/titlebar/sticky_normal_inactive.png"
-theme.titlebar_sticky_button_focus_inactive     = theme.default_dir.."/titlebar/sticky_focus_inactive.png"
-theme.titlebar_sticky_button_normal_active      = theme.default_dir.."/titlebar/sticky_normal_active.png"
-theme.titlebar_sticky_button_focus_active       = theme.default_dir.."/titlebar/sticky_focus_active.png"
-theme.titlebar_floating_button_normal_inactive  = theme.default_dir.."/titlebar/floating_normal_inactive.png"
-theme.titlebar_floating_button_focus_inactive   = theme.default_dir.."/titlebar/floating_focus_inactive.png"
-theme.titlebar_floating_button_normal_active    = theme.default_dir.."/titlebar/floating_normal_active.png"
-theme.titlebar_floating_button_focus_active     = theme.default_dir.."/titlebar/floating_focus_active.png"
-theme.titlebar_maximized_button_normal_inactive = theme.default_dir.."/titlebar/maximized_normal_inactive.png"
-theme.titlebar_maximized_button_focus_inactive  = theme.default_dir.."/titlebar/maximized_focus_inactive.png"
-theme.titlebar_maximized_button_normal_active   = theme.default_dir.."/titlebar/maximized_normal_active.png"
-theme.titlebar_maximized_button_focus_active    = theme.default_dir.."/titlebar/maximized_focus_active.png"
-
-theme.musicplr = string.format("%s -e ncmpcpp", awful.util.terminal)
+--[[ Reproductor
+theme.mpdl                                      = theme.widget_dir .. "/mpd.png"
+theme.prev                                      = theme.widget_dir .. "/prev.png"
+theme.nex                                       = theme.widget_dir .. "/next.png"
+theme.stop                                      = theme.widget_dir .. "/stop.png"
+theme.pause                                     = theme.widget_dir .. "/pause.png"
+theme.play                                      = theme.widget_dir .. "/play.png"
+--]]
 
 local markup = lain.util.markup
 local blue   = "#80CCE6"
 local space3 = markup.font("Roboto 3", " ")
 
 -- Clock
-local mytextclock = wibox.widget.textclock(markup("#FFFFFF", space3 .. "%H:%M   " .. markup.font("Roboto 4", " ")))
+local mytextclock = wibox.widget.textclock(markup(theme.fg_normal, space3 .. "%H:%M     "))
 mytextclock.font = theme.font
 local clock_icon = wibox.widget.imagebox(theme.clock)
 local clockbg = wibox.container.background(mytextclock, theme.bg_focus, gears.shape.rectangle)
 local clockwidget = wibox.container.margin(clockbg, dpi(0), dpi(3), dpi(5), dpi(5))
 
 -- Calendar
-local mytextcalendar = wibox.widget.textclock(markup.fontfg(theme.font, "#FFFFFF", space3 .. "%d %b " .. markup.font("Roboto 5", " ")))
+local mytextcalendar = wibox.widget.textclock(markup.fontfg(theme.font, theme.fg_normal, space3 .. "%d %b "))
 local calendar_icon = wibox.widget.imagebox(theme.calendar)
 local calbg = wibox.container.background(mytextcalendar, theme.bg_focus, gears.shape.rectangle)
 local calendarwidget = wibox.container.margin(calbg, dpi(0), dpi(0), dpi(5), dpi(5))
 theme.cal = lain.widget.cal({
     attach_to = { mytextclock, mytextcalendar },
     notification_preset = {
-        fg = "#FFFFFF",
+        fg = theme.fg_normal,
         bg = theme.bg_normal,
         position = "bottom_right",
-        font = "Monospace 10"
+        font = theme.calendar_font,
     }
 })
 
--- MPD
-local mpd_icon = awful.widget.launcher({ image = theme.mpdl, command = theme.musicplr })
-local prev_icon = wibox.widget.imagebox(theme.prev)
-local next_icon = wibox.widget.imagebox(theme.nex)
-local stop_icon = wibox.widget.imagebox(theme.stop)
-local pause_icon = wibox.widget.imagebox(theme.pause)
-local play_pause_icon = wibox.widget.imagebox(theme.play)
-theme.mpd = lain.widget.mpd({
-    settings = function ()
-        if mpd_now.state == "play" then
-            mpd_now.artist = mpd_now.artist:upper():gsub("&.-;", string.lower)
-            mpd_now.title = mpd_now.title:upper():gsub("&.-;", string.lower)
-            widget:set_markup(markup.font("Roboto 4", " ")
-                              .. markup.font(theme.taglist_font,
-                              " " .. mpd_now.artist
-                              .. " - " ..
-                              mpd_now.title .. "  ") .. markup.font("Roboto 5", " "))
-            play_pause_icon:set_image(theme.pause)
-        elseif mpd_now.state == "pause" then
-            widget:set_markup(markup.font("Roboto 4", " ") ..
-                              markup.font(theme.taglist_font, " MPD PAUSED  ") ..
-                              markup.font("Roboto 5", " "))
-            play_pause_icon:set_image(theme.play)
-        else
-            widget:set_markup("")
-            play_pause_icon:set_image(theme.play)
-        end
-    end
-})
-local musicbg = wibox.container.background(theme.mpd.widget, theme.bg_focus, gears.shape.rectangle)
-local musicwidget = wibox.container.margin(musicbg, dpi(0), dpi(0), dpi(5), dpi(5))
+--fs
+local fs_icon = wibox.widget.imagebox(theme.disk)
+--FALTA
 
-musicwidget:buttons(my_table.join(awful.button({ }, 1,
-function () awful.spawn(theme.musicplr) end)))
-prev_icon:buttons(my_table.join(awful.button({}, 1,
-function ()
-    os.execute("mpc prev")
-    theme.mpd.update()
-end)))
-next_icon:buttons(my_table.join(awful.button({}, 1,
-function ()
-    os.execute("mpc next")
-    theme.mpd.update()
-end)))
-stop_icon:buttons(my_table.join(awful.button({}, 1,
-function ()
-    play_pause_icon:set_image(theme.play)
-    os.execute("mpc stop")
-    theme.mpd.update()
-end)))
-play_pause_icon:buttons(my_table.join(awful.button({}, 1,
-function ()
-    os.execute("mpc toggle")
-    theme.mpd.update()
-end)))
-
--- / fs
---[[ commented because it needs Gio/Glib >= 2.54
-theme.fs = lain.widget.fs({
-    notification_preset = { bg = theme.bg_normal, font = "Monospace 9" },
-})
---]]
+--Spotify
 
 -- ALSA volume bar
+local volume_icon = wibox.widget.imagebox(theme.vol)
 theme.volume = lain.widget.alsabar({
-    notification_preset = { font = "Monospace 9"},
+    notification_preset = { font = theme.calendar_font},
     --togglechannel = "IEC958,3",
     width = dpi(80), height = dpi(10), border_width = dpi(0),
     colors = {
@@ -214,8 +152,7 @@ volumewidget = wibox.container.margin(volumewidget, dpi(0), dpi(0), dpi(5), dpi(
 local cpu_icon = wibox.widget.imagebox(theme.cpu)
 local cpu = lain.widget.cpu({
     settings = function()
-        widget:set_markup(space3 .. markup.font(theme.font, "CPU " .. cpu_now.usage
-                          .. "% ") .. markup.font("Roboto 5", " "))
+        widget:set_markup(space3 .. markup.font(theme.widget_font, "CPU " .. cpu_now.usage .. "% "))
     end
 })
 local cpubg = wibox.container.background(cpu.widget, theme.bg_focus, gears.shape.rectangle)
@@ -225,7 +162,7 @@ local cpuwidget = wibox.container.margin(cpubg, dpi(0), dpi(0), dpi(5), dpi(5))
 local mem_icon = wibox.widget.imagebox(theme.mem)
 local mem = lain.widget.mem({
     settings = function()
-        widget:set_markup(markup.font(theme.font, " " .. mem_now.used .. "MB ") .. markup.font("Roboto 5", " "))
+        widget:set_markup(markup.font(theme.widget_font, " " .. mem_now.used .. "MB "))
     end
 })
 local membg = wibox.container.background(mem.widget, theme.bg_focus, gears.shape.rectangle)
@@ -235,19 +172,20 @@ local memwidget = wibox.container.margin(membg, dpi(0), dpi(0), dpi(5), dpi(5))
 local temp_icon = wibox.widget.imagebox(theme.temp)
 local temp = lain.widget.temp({
     settings = function()
-        widget:set_markup(markup.font(theme.font, " " .. coretemp_now .. "°C ") .. markup.font("Roboto 5", " "))
+        widget:set_markup(markup.font(theme.widget_font, " " .. coretemp_now .. "°C "))
     end
 })
 local tempbg = wibox.container.background(temp.widget, theme.bg_focus, gears.shape.rectangle)
 local tempwidget = wibox.container.margin(tempbg, dpi(0), dpi(0), dpi(5), dpi(5))
 
 -- Net
+local net_icon = wibox.widget.imagebox(theme.net)
 local netdown_icon = wibox.widget.imagebox(theme.net_down)
 local netup_icon = wibox.widget.imagebox(theme.net_up)
 local net = lain.widget.net({
     settings = function()
-        widget:set_markup(markup.font("Roboto 1", " ") .. markup.font(theme.font, net_now.received .. " - "
-                          .. net_now.sent) .. markup.font("Roboto 2", " "))
+        widget:set_markup(markup.font(theme.widget_font, net_now.received .. " - "
+                          .. net_now.sent))
     end
 })
 local netbg = wibox.container.background(net.widget, theme.bg_focus, gears.shape.rectangle)
@@ -265,6 +203,7 @@ local spr_right = wibox.widget.imagebox(theme.spr_right)
 local spr_bottom_right = wibox.widget.imagebox(theme.spr_bottom_right)
 local spr_left = wibox.widget.imagebox(theme.spr_left)
 local spr_empty = wibox.widget.imagebox(theme.spr_empty)
+local spr_middle = wibox.widget.imagebox(theme.spr_middle)
 local bar = wibox.widget.imagebox(theme.bar)
 local bottom_bar = wibox.widget.imagebox(theme.bottom_bar)
 
@@ -293,24 +232,6 @@ function theme.at_screen_connect(s)
         awful.layout.suit.floating,     --2
         awful.layout.suit.spiral,       --3
         awful.layout.suit.max,          --4
-        --awful.layout.suit.tile.left,
-        --awful.layout.suit.tile.bottom,
-        --awful.layout.suit.tile.top,
-        --awful.layout.suit.fair,
-        --awful.layout.suit.fair.horizontal,
-        --awful.layout.suit.spiral.dwindle,
-        --awful.layout.suit.max.fullscreen,
-        --awful.layout.suit.magnifier,
-        --awful.layout.suit.corner.nw,
-        --awful.layout.suit.corner.ne,
-        --awful.layout.suit.corner.sw,
-        --awful.layout.suit.corner.se,
-        --lain.layout.cascade,
-        --lain.layout.cascade.tile,
-        --lain.layout.centerwork,
-        --lain.layout.centerwork.horizontal,
-        --lain.layout.termfair,
-        --lain.layout.termfair.center,
     }
 
     -- Tags
@@ -374,7 +295,17 @@ function theme.at_screen_connect(s)
             spr_small,
             s.mypromptbox,
         },
-	    nil,-- Middle widget 
+	    {-- Middle widget
+            layout = wibox.layout.fixed.horizontal,
+            spr_middle,
+            spotify_widget({
+                    font = theme.font,
+                    play_icon = theme.spotify_play,
+                    pause_icon = theme.spotify_pause,
+                    max_length = 60,
+                    show_tooltip = false
+                }),
+        }, 
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
@@ -388,10 +319,13 @@ function theme.at_screen_connect(s)
             temp_icon,
             tempwidget,
             bar,
+            net_icon,
             netdown_icon,
             networkwidget,
             netup_icon,
 	        spr_left,
+            spr_empty,
+            logout_menu_widget(),
             spr_empty,
         },
     }
@@ -411,24 +345,19 @@ function theme.at_screen_connect(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            spr_bottom_right,
-	        musicwidget,
-            bottom_bar,
-            prev_icon,
-            next_icon,
-            stop_icon,
-            play_pause_icon,
-            bottom_bar,
-            mpd_icon,
-            bottom_bar,
+            volume_icon,
             volumewidget,
-	        bottom_bar,
+            bottom_bar,
             calendar_icon,
             calendarwidget,
             bottom_bar,
-	        clock_icon,
+            clock_icon,
             clockwidget,
 	        spr_bottom_left,
+            spr_empty,
+            battery_widget({
+                path_to_icons = theme.battery_dir 
+            }),
             spr_empty,
         },
     }
