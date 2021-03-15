@@ -30,10 +30,14 @@ Libreria de widgets: https://github.com/streetturtle/awesome-wm-widgets
         chmod +x sp
         sudo cp ./sp /usr/local/bin/
 
+- **lxappearance (Gestor de gtk themes)** 
+
+        sudo apt-get install -y lxappearance
+
 ## Instalación
 
     cd ~/.config
-    git clone https://github.com/tin-gprieto/awesome
+    git clone --recursive https://github.com/tin-gprieto/awesome
     
 ## Customización
  
