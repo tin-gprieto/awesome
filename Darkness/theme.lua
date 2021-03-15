@@ -24,7 +24,7 @@ theme.icon_dir                                  = os.getenv("HOME") .. "/.config
 theme.widget_dir                                = theme.icon_dir .. "/widget"
 theme.layout_dir                                = theme.icon_dir .. "/layout"
 theme.tag_dir                                   = theme.icon_dir .. "/tag"
-theme.battery_dir                               = theme.icon_dir .. "/battery_status"
+theme.battery_dir                               = theme.icon_dir .. "/battery"
 theme.wallpaper                                 = os.getenv("HOME") .. "/.config/awesome/Darkness/wallpapers/abstract.png"
 theme.font                                      = "Roboto Bold 10"
 theme.widget_font                               = "Roboto Bold 8"
@@ -134,7 +134,7 @@ local fs_icon = wibox.widget.imagebox(theme.disk)
 -- ALSA volume bar
 local volume_icon = wibox.widget.imagebox(theme.vol)
 theme.volume = lain.widget.alsabar({
-    notification_preset = { font = theme.calendar_font},
+    notification_preset = { font = theme.widget_font},
     --togglechannel = "IEC958,3",
     width = dpi(80), height = dpi(10), border_width = dpi(0),
     colors = {
@@ -356,7 +356,9 @@ function theme.at_screen_connect(s)
 	        spr_bottom_left,
             spr_empty,
             battery_widget({
-                path_to_icons = theme.battery_dir 
+                font = theme.widget_font,
+                path_to_icons = theme.battery_dir,
+                show_current_level = true,
             }),
             spr_empty,
         },
