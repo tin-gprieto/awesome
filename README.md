@@ -32,8 +32,8 @@ Libreria de widgets: https://github.com/streetturtle/awesome-wm-widgets
 
 ## Instalación
 
-        cd ~/.config
-        git clone https://github.com/tin-gprieto/awesome
+    cd ~/.config
+    git clone https://github.com/tin-gprieto/awesome
     
 ## Customización
  
