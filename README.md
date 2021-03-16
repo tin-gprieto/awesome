@@ -9,7 +9,9 @@ Libreria de widgets: https://github.com/streetturtle/awesome-wm-widgets
 
 ## Screenshots
 
-![Alt text](https://github.com/tin-gprieto/awesome/tree/main/Darkness/screenshots/screenshot.png "Escritorio")
+#### Escritorio
+
+![](/Darkness/screenshots/screenshot.png?raw=true)
 
 ---------------------------------------------------------
 
