@@ -27,7 +27,6 @@ theme.tag_dir                                   = theme.icon_dir .. "/tag"
 theme.battery_dir                               = theme.icon_dir .. "/battery"
 theme.wallpaper                                 = os.getenv("HOME") .. "/.config/awesome/Darkness/wallpapers/abstract.png"
 theme.font                                      = "Roboto Bold 10"
-theme.widget_font                               = "Roboto Bold 9"
 theme.calendar_font                             = "Monospace 10"
 theme.taglist_font                              = "Roboto Condensed Regular 10"
 theme.fg_normal                                 = "#FFFFFF"
@@ -138,7 +137,7 @@ local fs_icon = wibox.widget.imagebox(theme.disk)
 -- ALSA volume bar
 local volume_icon = wibox.widget.imagebox(theme.vol)
 theme.volume = lain.widget.alsabar({
-    notification_preset = { font = theme.widget_font},
+    notification_preset = { font = theme.font},
     --togglechannel = "IEC958,3",
     width = dpi(80), height = dpi(10), border_width = dpi(0),
     colors = {
@@ -156,7 +155,7 @@ volumewidget = wibox.container.margin(volumewidget, dpi(0), dpi(0), dpi(5), dpi(
 local cpu_icon = wibox.widget.imagebox(theme.cpu)
 local cpu = lain.widget.cpu({
     settings = function()
-        widget:set_markup(markup.font(theme.widget_font, " CPU " .. cpu_now.usage .. "% "))
+        widget:set_markup(markup.font(theme.font, " CPU " .. cpu_now.usage .. "% "))
     end
 })
 local cpubg = wibox.container.background(cpu.widget, theme.bg_focus, gears.shape.rectangle)
@@ -166,7 +165,7 @@ local cpuwidget = wibox.container.margin(cpubg, dpi(0), dpi(0), dpi(5), dpi(5))
 local mem_icon = wibox.widget.imagebox(theme.mem)
 local mem = lain.widget.mem({
     settings = function()
-        widget:set_markup(markup.font(theme.widget_font, " " .. mem_now.used .. "MB "))
+        widget:set_markup(markup.font(theme.font, " " .. mem_now.used .. "MB "))
     end
 })
 local membg = wibox.container.background(mem.widget, theme.bg_focus, gears.shape.rectangle)
@@ -176,7 +175,7 @@ local memwidget = wibox.container.margin(membg, dpi(0), dpi(0), dpi(5), dpi(5))
 local temp_icon = wibox.widget.imagebox(theme.temp)
 local temp = lain.widget.temp({
     settings = function()
-        widget:set_markup(markup.font(theme.widget_font, " " .. coretemp_now .. "°C "))
+        widget:set_markup(markup.font(theme.font, " " .. coretemp_now .. "°C "))
     end
 })
 local tempbg = wibox.container.background(temp.widget, theme.bg_focus, gears.shape.rectangle)
@@ -188,7 +187,7 @@ local netdown_icon = wibox.widget.imagebox(theme.net_down)
 local netup_icon = wibox.widget.imagebox(theme.net_up)
 local net = lain.widget.net({
     settings = function()
-        widget:set_markup(markup.font(theme.widget_font, net_now.received .. " - "
+        widget:set_markup(markup.font(theme.font, net_now.received .. " - "
                           .. net_now.sent))
     end
 })
@@ -310,7 +309,7 @@ function theme.at_screen_connect(s)
             --[[ Info bateria para Notebooks
             bar,
             battery_widget({
-                font = theme.widget_font,
+                font = theme.font,
                 path_to_icons = theme.battery_dir,
                 show_current_level = true,
             }),
