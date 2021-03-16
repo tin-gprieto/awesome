@@ -124,7 +124,7 @@ theme.cal = lain.widget.cal({
     notification_preset = {
         fg = theme.fg_normal,
         bg = theme.bg_normal,
-        position = "bottom_right",
+        position = "top_right",
         font = theme.calendar_font,
     }
 })
