@@ -7,15 +7,14 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="16"
-   height="16"
-   viewBox="0 0 16 16"
+   width="22"
+   height="22"
    version="1.1"
-   id="svg7"
+   id="svg4"
    sodipodi:docname="other.svg"
-   inkscape:version="1.0.2 (1.0.2+r75+1)">
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
   <metadata
-     id="metadata11">
+     id="metadata10">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -26,6 +25,8 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
+  <defs
+     id="defs8" />
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -35,28 +36,51 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="806"
-     inkscape:window-height="665"
-     id="namedview9"
+     inkscape:window-width="1366"
+     inkscape:window-height="687"
+     id="namedview6"
      showgrid="false"
-     inkscape:zoom="18.28125"
-     inkscape:cx="5.0691587"
-     inkscape:cy="8.4705633"
-     inkscape:window-x="8"
-     inkscape:window-y="40"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg7" />
-  <defs
-     id="defs3">
-    <style
-       id="current-color-scheme"
-       type="text/css">
-   .ColorScheme-Text { color:#565656; } .ColorScheme-Highlight { color:#5294e2; }
-  </style>
-  </defs>
-  <path
-     style="fill:#dfdfdf;fill-opacity:1"
-     class="ColorScheme-Text"
-     d="M 3.5 7 C 2.67765 7 2 7.67765 2 8.5 C 2 9.32235 2.67765 10 3.5 10 C 4.32235 10 5 9.32235 5 8.5 C 5 7.67765 4.32235 7 3.5 7 z M 7.5 7 C 6.67765 7 6 7.67765 6 8.5 C 6 9.32235 6.67765 10 7.5 10 C 8.32235 10 9 9.32235 9 8.5 C 9 7.67765 8.32235 7 7.5 7 z M 11.5 7 C 10.67765 7 10 7.67765 10 8.5 C 10 9.32235 10.67765 10 11.5 10 C 12.32235 10 13 9.32235 13 8.5 C 13 7.67765 12.32235 7 11.5 7 z"
-     id="path5" />
+     inkscape:zoom="18.545482"
+     inkscape:cx="5.6754145"
+     inkscape:cy="11.085866"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g8"
+     inkscape:document-rotation="0" />
+  <g
+     transform="matrix(1.5382268,0,0,1.6736125,-18.550391,-0.19740149)"
+     fill-rule="evenodd"
+     stroke-width="0.26458"
+     id="g8">
+    <path
+       style="color:#565656;fill:#d4d4d4;fill-opacity:1;stroke-width:0.148074"
+       class="ColorScheme-Text"
+       d="M 16.740396,3.3119179 14.976551,4.910109 h 6.46743 l 1.763844,-1.5981911 z m 0,2.6636516 -1.763845,1.5981914 h 6.46743 l 1.763844,-1.5981914 z m 0,2.6636524 -1.763845,1.5981911 h 6.46743 l 1.763844,-1.5981911 z"
+       id="path5" />
+    <path
+       style="fill:#cfcfcf;fill-opacity:1;stroke-width:0.0403475"
+       d="m 15.881754,6.7757028 0.871401,-0.7899544 h 3.202007 3.202006 l -0.8714,0.7899544 -0.871401,0.7899545 H 18.21236 15.010353 Z"
+       id="path954" />
+    <path
+       style="fill:#cfcfcf;fill-opacity:1;stroke-width:0.0403475"
+       d="m 15.881754,6.7757028 0.871401,-0.7899544 h 3.202007 3.202006 l -0.8714,0.7899544 -0.871401,0.7899545 H 18.21236 15.010353 Z"
+       id="path956" />
+    <path
+       style="fill:#cfcfcf;fill-opacity:1;stroke-width:0.0403475"
+       d="m 15.881754,6.7757028 0.871401,-0.7899544 h 3.202007 3.202006 l -0.8714,0.7899544 -0.871401,0.7899545 H 18.21236 15.010353 Z"
+       id="path958" />
+    <path
+       style="fill:#b1b1b1;fill-opacity:1;stroke-width:0.0403475"
+       d="m 15.911368,9.4474571 0.8714,-0.7899539 h 3.202008 3.202007 l -0.871401,0.7899539 -0.871401,0.7899559 h -3.202007 -3.202007 z"
+       id="path960" />
+    <path
+       style="fill:#cfcfcf;fill-opacity:1;stroke-width:0.0403475"
+       d="m 15.881754,4.1042206 0.871401,-0.7899544 h 3.217859 3.217858 L 22.317471,4.1042206 21.44607,4.894175 h -3.217858 -3.217859 z"
+       id="path962" />
+    <path
+       style="fill:#dfdfdf;fill-opacity:1;stroke-width:0.0403475"
+       d="m 15.881754,4.1042206 0.871401,-0.7899544 h 3.217859 3.217858 L 22.317471,4.1042206 21.44607,4.894175 h -3.217858 -3.217859 z"
+       id="path964" />
+  </g>
 </svg>

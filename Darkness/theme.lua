@@ -27,7 +27,7 @@ theme.tag_dir                                   = theme.icon_dir .. "/tag"
 theme.battery_dir                               = theme.icon_dir .. "/battery"
 theme.wallpaper                                 = os.getenv("HOME") .. "/.config/awesome/Darkness/wallpapers/abstract.png"
 theme.font                                      = "Roboto Bold 10"
-theme.widget_font                               = "Roboto Bold 8"
+theme.widget_font                               = "Roboto Bold 9"
 theme.calendar_font                             = "Monospace 10"
 theme.taglist_font                              = "Roboto Condensed Regular 10"
 theme.fg_normal                                 = "#FFFFFF"
@@ -52,24 +52,22 @@ theme.taglist_squares_unsel                     = theme.icon_dir .. "/square_uns
 theme.spr_small                                 = theme.icon_dir .. "/spr_small.png"
 theme.spr_very_small                            = theme.icon_dir .. "/spr_very_small.png"
 theme.spr_right                                 = theme.icon_dir .. "/spr_right.png"
-theme.spr_bottom_right                          = theme.icon_dir .. "/spr_bottom_right.png"
 theme.spr_left                                  = theme.icon_dir .. "/spr_left.png"
 theme.spr_empty                                 = theme.icon_dir .. "/spr_empty.png"
 theme.spr_middle                                = theme.icon_dir .. "/spr_middle.png"
 theme.bar                                       = theme.icon_dir .. "/bar.png"
-theme.bottom_bar                                = theme.icon_dir .. "/bottom_bar.png"
 theme.spotify_play                              = theme.widget_dir .. "/spotify_play.png"
 theme.spotify_pause                             = theme.widget_dir .. "/spotify_pause.png"
-theme.vol                                       = theme.widget_dir .. "/vol.png"
-theme.net                                       = theme.widget_dir .. "/net.png"
-theme.clock                                     = theme.widget_dir .. "/clock.png"
-theme.calendar                                  = theme.widget_dir .. "/cal.png"
-theme.cpu                                       = theme.widget_dir .. "/cpu.png"
-theme.mem                                       = theme.widget_dir .. "/mem.png"
-theme.temp                                      = theme.widget_dir .. "/temp.png"
-theme.disk                                      = theme.widget_dir .. "/disk.png"
-theme.net_up                                    = theme.widget_dir .. "/net_up.png"
-theme.net_down                                  = theme.widget_dir .. "/net_down.png"
+theme.vol                                       = theme.widget_dir .. "/vol.svg"
+theme.net                                       = theme.widget_dir .. "/net.svg"
+theme.clock                                     = theme.widget_dir .. "/clock.svg"
+theme.calendar                                  = theme.widget_dir .. "/cal.svg"
+theme.cpu                                       = theme.widget_dir .. "/cpu.svg"
+theme.mem                                       = theme.widget_dir .. "/mem.svg"
+theme.temp                                      = theme.widget_dir .. "/temp.svg"
+theme.disk                                      = theme.widget_dir .. "/disk.svg"
+theme.net_up                                    = theme.widget_dir .. "/net_up.svg"
+theme.net_down                                  = theme.widget_dir .. "/net_down.svg"
 theme.layout_tile                               = theme.layout_dir .. "/tile.png"
 theme.layout_tileleft                           = theme.layout_dir .. "/tileleft.png"
 theme.layout_tilebottom                         = theme.layout_dir .. "/tilebottom.png"
@@ -81,37 +79,43 @@ theme.layout_dwindle                            = theme.layout_dir .. "/dwindle.
 theme.layout_max                                = theme.layout_dir .. "/max.png"
 theme.layout_magnifier                          = theme.layout_dir .. "/magnifier.png"
 theme.layout_floating                           = theme.layout_dir .. "/floating.png"
-theme.tag_term                                  = theme.tag_dir .. "/terminal.png"
-theme.tag_dev                                   = theme.tag_dir .. "/dev.png"
-theme.tag_docs                                  = theme.tag_dir .. "/docs.png"
-theme.tag_web                                   = theme.tag_dir .. "/web.png"
-theme.tag_music                                 = theme.tag_dir .. "/music.png"
-theme.tag_other                                 = theme.tag_dir .. "/other.png"
+theme.tag_term                                  = theme.tag_dir .. "/terminal.svg"
+theme.tag_dev                                   = theme.tag_dir .. "/dev.svg"
+theme.tag_docs                                  = theme.tag_dir .. "/docs.svg"
+theme.tag_web                                   = theme.tag_dir .. "/web.svg"
+theme.tag_music                                 = theme.tag_dir .. "/music.svg"
+theme.tag_other                                 = theme.tag_dir .. "/other.svg"
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = true
 theme.useless_gap                               = dpi(4)
---[[ Reproductor
-theme.mpdl                                      = theme.widget_dir .. "/mpd.png"
-theme.prev                                      = theme.widget_dir .. "/prev.png"
-theme.nex                                       = theme.widget_dir .. "/next.png"
-theme.stop                                      = theme.widget_dir .. "/stop.png"
-theme.pause                                     = theme.widget_dir .. "/pause.png"
-theme.play                                      = theme.widget_dir .. "/play.png"
---]]
+
+-- Launcher
+local mylauncher = awful.widget.button({ image = theme.awesome_icon_launcher })
+mylauncher:connect_signal("button::press", function() awful.util.mymainmenu:toggle() end)
+
+-- Separators
+local first = wibox.widget.textbox('<span font="Roboto 7"> </span>')
+local spr_small = wibox.widget.imagebox(theme.spr_small)
+local spr_very_small = wibox.widget.imagebox(theme.spr_very_small)
+local spr_right = wibox.widget.imagebox(theme.spr_right)
+local spr_left = wibox.widget.imagebox(theme.spr_left)
+local spr_empty = wibox.widget.imagebox(theme.spr_empty)
+local spr_middle = wibox.widget.imagebox(theme.spr_middle)
+local bar = wibox.widget.imagebox(theme.bar)
+
 
 local markup = lain.util.markup
 local blue   = "#80CCE6"
-local space3 = markup.font("Roboto 3", " ")
 
 -- Clock
-local mytextclock = wibox.widget.textclock(markup(theme.fg_normal, space3 .. "%H:%M     "))
+local mytextclock = wibox.widget.textclock(markup(theme.fg_normal, " %H:%M     "))
 mytextclock.font = theme.font
 local clock_icon = wibox.widget.imagebox(theme.clock)
 local clockbg = wibox.container.background(mytextclock, theme.bg_focus, gears.shape.rectangle)
 local clockwidget = wibox.container.margin(clockbg, dpi(0), dpi(3), dpi(5), dpi(5))
 
 -- Calendar
-local mytextcalendar = wibox.widget.textclock(markup.fontfg(theme.font, theme.fg_normal, space3 .. "%d %b "))
+local mytextcalendar = wibox.widget.textclock(markup.fontfg(theme.font, theme.fg_normal, " %d %b "))
 local calendar_icon = wibox.widget.imagebox(theme.calendar)
 local calbg = wibox.container.background(mytextcalendar, theme.bg_focus, gears.shape.rectangle)
 local calendarwidget = wibox.container.margin(calbg, dpi(0), dpi(0), dpi(5), dpi(5))
@@ -152,7 +156,7 @@ volumewidget = wibox.container.margin(volumewidget, dpi(0), dpi(0), dpi(5), dpi(
 local cpu_icon = wibox.widget.imagebox(theme.cpu)
 local cpu = lain.widget.cpu({
     settings = function()
-        widget:set_markup(space3 .. markup.font(theme.widget_font, "CPU " .. cpu_now.usage .. "% "))
+        widget:set_markup(markup.font(theme.widget_font, " CPU " .. cpu_now.usage .. "% "))
     end
 })
 local cpubg = wibox.container.background(cpu.widget, theme.bg_focus, gears.shape.rectangle)
@@ -190,22 +194,6 @@ local net = lain.widget.net({
 })
 local netbg = wibox.container.background(net.widget, theme.bg_focus, gears.shape.rectangle)
 local networkwidget = wibox.container.margin(netbg, dpi(0), dpi(0), dpi(5), dpi(5))
-
--- Launcher
-local mylauncher = awful.widget.button({ image = theme.awesome_icon_launcher })
-mylauncher:connect_signal("button::press", function() awful.util.mymainmenu:toggle() end)
-
--- Separators
-local first = wibox.widget.textbox('<span font="Roboto 7"> </span>')
-local spr_small = wibox.widget.imagebox(theme.spr_small)
-local spr_very_small = wibox.widget.imagebox(theme.spr_very_small)
-local spr_right = wibox.widget.imagebox(theme.spr_right)
-local spr_bottom_right = wibox.widget.imagebox(theme.spr_bottom_right)
-local spr_left = wibox.widget.imagebox(theme.spr_left)
-local spr_empty = wibox.widget.imagebox(theme.spr_empty)
-local spr_middle = wibox.widget.imagebox(theme.spr_middle)
-local bar = wibox.widget.imagebox(theme.bar)
-local bottom_bar = wibox.widget.imagebox(theme.bottom_bar)
 
 local barcolor  = gears.color({
     type  = "linear",
@@ -286,13 +274,14 @@ function theme.at_screen_connect(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            first,
             spr_empty,
-            spr_bottom_right,
+            mylauncher,
+            spr_empty,
+            first,
             s.mytag,
-            spr_small,
+            bar,
             s.mylayoutbox,
-            spr_small,
+            bar,
             s.mypromptbox,
         },
 	    {-- Middle widget
@@ -309,21 +298,24 @@ function theme.at_screen_connect(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
-            spr_right,
-	        cpu_icon,
-            cpuwidget,
-	        bar,
-	        mem_icon,
-            memwidget,
             bar,
-            temp_icon,
-            tempwidget,
+            volume_icon,
+            volumewidget,
             bar,
-            net_icon,
-            netdown_icon,
-            networkwidget,
-            netup_icon,
-	        spr_left,
+            calendar_icon,
+            calendarwidget,
+            bar,
+            clock_icon,
+            clockwidget,
+            --[[ Info bateria para Notebooks
+            bar,
+            battery_widget({
+                font = theme.widget_font,
+                path_to_icons = theme.battery_dir,
+                show_current_level = true,
+            }),
+            bar,
+            --]]
             spr_empty,
             logout_menu_widget(),
             spr_empty,
@@ -340,27 +332,28 @@ function theme.at_screen_connect(s)
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             spr_empty,
-            mylauncher,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            volume_icon,
-            volumewidget,
-            bottom_bar,
-            calendar_icon,
-            calendarwidget,
-            bottom_bar,
-            clock_icon,
-            clockwidget,
-	        spr_bottom_left,
+            spr_empty,            
+            bar,
+	        cpu_icon,
+            cpuwidget,
+	        bar,
+	        mem_icon,
+            memwidget,
+            bar,
+            temp_icon,
+            tempwidget,
+            bar,
+            net_icon,
+            netdown_icon,
+            networkwidget,
+            netup_icon,
+	        bar,
             spr_empty,
-            battery_widget({
-                font = theme.widget_font,
-                path_to_icons = theme.battery_dir,
-                show_current_level = true,
-            }),
-            spr_empty,
+            
         },
     }
 end

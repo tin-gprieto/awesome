@@ -73,5 +73,4 @@ Libreria de widgets: https://github.com/streetturtle/awesome-wm-widgets
 
 - Arreglar ventanas (opción redimensionar y anclar/desanclar)
 
-- Modificar íconos
 
