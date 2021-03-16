@@ -9,7 +9,7 @@ Libreria de widgets: https://github.com/streetturtle/awesome-wm-widgets
 
 ## Screenshots
 
-(...)
+https://github.com/tin-gprieto/awesome/Darkness/screenshots
 
 ---------------------------------------------------------
 
