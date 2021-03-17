@@ -72,7 +72,7 @@ beautiful.init(string.format("%s/.config/awesome/%s/theme.lua", os.getenv("HOME"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local ctrlkey      = "Control"
-local shiftkey      = "Shift"
+local shiftkey     = "Shift"
 
 -- ??
 local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awesome-copycats/issues/275
