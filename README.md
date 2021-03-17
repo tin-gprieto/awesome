@@ -11,7 +11,7 @@ Libreria de widgets: https://github.com/streetturtle/awesome-wm-widgets
 
 #### Escritorio
 
-![](/Darkness/screenshots/screenshot.png?raw=true)
+![](/screenshots/Darkness.png?raw=true)
 
 ---------------------------------------------------------
 
@@ -63,16 +63,16 @@ Libreria de widgets: https://github.com/streetturtle/awesome-wm-widgets
 
 - Alinear e independizar Spotify widget
 
-- Achicar notificación de canción de Spotify
+### Agregar 
 
-### Arreglar
+- Run shell widget
 
 - Widget del porcentaje ocupado del disco (top wibox)
 
+### Arreglar
+
 - Arreglar widget de temperatura del procesador
 
-- Arreglar widget de bateria (icons)
-
-- Arreglar ventanas (opción redimensionar y anclar/desanclar)
+- Arreglar widget de bateria (notificación alerta en PC)
 
 

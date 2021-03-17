@@ -1,7 +1,7 @@
 --[[
 
-    Configuración template Awesome WM 
-    github.com/tin-gprieto
+     Awesome WM configuration template
+     github.com/lcpz
 
 --]]
 
@@ -23,6 +23,31 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 local my_table      = awful.util.table or gears.table -- 4.{0,1} compatibility
 local dpi           = require("beautiful.xresources").apply_dpi
 -- }}}
+
+-- {{{ Variable definitions
+
+local chosen_theme   = "Darkness"
+local themes_dir     = "%s/.config/awesome/%s/theme.lua"
+local titlebar_state = true
+--Keys
+local modkey       = "Mod4"
+local altkey       = "Mod1"
+local ctrlkey      = "Control"
+local shiftkey     = "Shift"
+--Programs
+local terminal     = "x-terminal-emulator"
+local editor       = os.getenv("EDITOR") or "vim"
+local gui_editor   = os.getenv("GUI_EDITOR") or "gvim"
+local browser      = os.getenv("BROWSER") or "firefox"
+local scrlocker    = "slock"
+--??
+local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awesome-copycats/issues/275
+local cycle_prev   = true -- cycle trough all previous client or just the first -- https://github.com/lcpz/awesome-copycats/issues/274
+
+--}}
+
+--Beautiful init
+beautiful.init(string.format(themes_dir, os.getenv("HOME"), chosen_theme))
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -56,37 +81,7 @@ local function run_once(cmd_arr)
     end
 end
 
-
 -- }}}
-
--- {{{ Set Theme
-
-local theme        = "Darkness"
-beautiful.init(string.format("%s/.config/awesome/%s/theme.lua", os.getenv("HOME"), theme))
-
--- }}}
-
--- {{{ Variable definitions
-
---Keys
-local modkey       = "Mod4"
-local altkey       = "Mod1"
-local ctrlkey      = "Control"
-local shiftkey     = "Shift"
-
--- ??
-local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awesome-copycats/issues/275
-local cycle_prev   = true -- cycle trough all previous client or just the first -- https://github.com/lcpz/awesome-copycats/issues/274
-
---Apps
-
-local terminal     = "x-terminal-emulator"
-local editor       = os.getenv("EDITOR") or "vim"
-local gui_editor   = os.getenv("GUI_EDITOR") or "gvim"
-local browser      = os.getenv("BROWSER") or "firefox"
-local scrlocker    = "slock"
-
-awful.util.terminal = terminal
 
 awful.util.taglist_buttons = my_table.join(
     awful.button({ }, 1, function(t) t:view_only() end),
@@ -111,7 +106,6 @@ awful.util.tasklist_buttons = my_table.join(
             c.minimized = true
         else
             --c:emit_signal("request::activate", "tasklist", {raise = true})<Paste>
-            
             -- Without this, the following
             -- :isvisible() makes no sense
             c.minimized = false
@@ -127,7 +121,6 @@ awful.util.tasklist_buttons = my_table.join(
     awful.button({ }, 2, function (c) c:kill() end),
     awful.button({ }, 3, function ()
         local instance = nil
-        
         return function ()
             if instance and instance.wibox.visible then
                 instance:hide()
@@ -341,16 +334,16 @@ globalkeys = my_table.join(
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, ctrlkey }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey, shiftkey   }, "q", awesome.quit,
+    awful.key({ modkey, shiftkey }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
-    awful.key({ altkey, shiftkey   }, "l",     function () awful.tag.incmwfact( 0.05)          end,
+    awful.key({ altkey, shiftkey }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
-    awful.key({ altkey, shiftkey   }, "h",     function () awful.tag.incmwfact(-0.05)          end,
+    awful.key({ altkey, shiftkey }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "layout"}),
-    awful.key({ modkey, shiftkey   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
+    awful.key({ modkey, shiftkey }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
-    awful.key({ modkey, shiftkey   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
+    awful.key({ modkey, shiftkey }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
               {description = "decrease the number of master clients", group = "layout"}),
     awful.key({ modkey, ctrlkey }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
               {description = "increase the number of columns", group = "layout"}),
@@ -358,7 +351,7 @@ globalkeys = my_table.join(
               {description = "decrease the number of columns", group = "layout"}),
     awful.key({ modkey }, "space", function () awful.layout.inc( 1)                end,
               {description = "select next", group = "layout"}),
-    awful.key({ modkey, shiftkey   }, "space", function () awful.layout.inc(-1)                end,
+    awful.key({ modkey, shiftkey }, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
 
     awful.key({ modkey, ctrlkey }, "n",
@@ -379,6 +372,10 @@ globalkeys = my_table.join(
     -- Widgets popups
     awful.key({ altkey, }, "c", function () if beautiful.cal then beautiful.cal.show(7) end end,
               {description = "show calendar", group = "widgets"}),
+    awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
+              {description = "show filesystem", group = "widgets"}),
+    awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
+              {description = "show weather", group = "widgets"}),
 
     -- Brightness
     awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end,
@@ -473,7 +470,7 @@ clientkeys = my_table.join(
             c.minimized = true
         end ,
         {description = "minimize", group = "client"}),
-    awful.key({ modkey,           }, "m",
+    awful.key({ modkey }, "m",
         function (c)
             c.maximized = not c.maximized
             c:raise()
@@ -576,7 +573,7 @@ awful.rules.rules = {
 
     -- Titlebars
     { rule_any = { type = { "dialog", "normal" } },
-      properties = { titlebars_enabled = true } },
+      properties = { titlebars_enabled = titlebar_state } },
 
     -- Set Firefox to always map on the first tag on screen 1.
     { rule = { class = "Firefox" },
@@ -639,10 +636,10 @@ client.connect_signal("request::titlebars", function(c)
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.floatingbutton (c),
+            --awful.titlebar.widget.floatingbutton (c),
             awful.titlebar.widget.maximizedbutton(c),
             awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
+            --awful.titlebar.widget.ontopbutton    (c),
             awful.titlebar.widget.closebutton    (c),
             layout = wibox.layout.fixed.horizontal()
         },
@@ -661,4 +658,3 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- possible workaround for tag preservation when switching back to default screen:
 -- https://github.com/lcpz/awesome-copycats/issues/251
 -- }}}
-

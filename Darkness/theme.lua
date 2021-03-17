@@ -13,7 +13,7 @@ local dpi   = require("beautiful.xresources").apply_dpi
 
 local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
 local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
-local battery_widget = require("awesome-wm-widgets.battery-widget.battery") 
+local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 
 local string, os = string, os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -106,6 +106,28 @@ theme.layout_max                                = theme.layout_dir .. "/max.png"
 theme.layout_magnifier                          = theme.layout_dir .. "/magnifier.png"
 theme.layout_floating                           = theme.layout_dir .. "/floating.png"
 
+--Titlebar
+theme.titlebar_close_button_normal              = theme.default_dir.."/titlebar/close_normal.png"
+theme.titlebar_close_button_focus               = theme.default_dir.."/titlebar/close_focus.png"
+theme.titlebar_minimize_button_normal           = theme.default_dir.."/titlebar/minimize_normal.png"
+theme.titlebar_minimize_button_focus            = theme.default_dir.."/titlebar/minimize_focus.png"
+theme.titlebar_ontop_button_normal_inactive     = theme.default_dir.."/titlebar/ontop_normal_inactive.png"
+theme.titlebar_ontop_button_focus_inactive      = theme.default_dir.."/titlebar/ontop_focus_inactive.png"
+theme.titlebar_ontop_button_normal_active       = theme.default_dir.."/titlebar/ontop_normal_active.png"
+theme.titlebar_ontop_button_focus_active        = theme.default_dir.."/titlebar/ontop_focus_active.png"
+theme.titlebar_sticky_button_normal_inactive    = theme.default_dir.."/titlebar/sticky_normal_inactive.png"
+theme.titlebar_sticky_button_focus_inactive     = theme.default_dir.."/titlebar/sticky_focus_inactive.png"
+theme.titlebar_sticky_button_normal_active      = theme.default_dir.."/titlebar/sticky_normal_active.png"
+theme.titlebar_sticky_button_focus_active       = theme.default_dir.."/titlebar/sticky_focus_active.png"
+theme.titlebar_floating_button_normal_inactive  = theme.default_dir.."/titlebar/floating_normal_inactive.png"
+theme.titlebar_floating_button_focus_inactive   = theme.default_dir.."/titlebar/floating_focus_inactive.png"
+theme.titlebar_floating_button_normal_active    = theme.default_dir.."/titlebar/floating_normal_active.png"
+theme.titlebar_floating_button_focus_active     = theme.default_dir.."/titlebar/floating_focus_active.png"
+theme.titlebar_maximized_button_normal_inactive = theme.default_dir.."/titlebar/maximized_normal_inactive.png"
+theme.titlebar_maximized_button_focus_inactive  = theme.default_dir.."/titlebar/maximized_focus_inactive.png"
+theme.titlebar_maximized_button_normal_active   = theme.default_dir.."/titlebar/maximized_normal_active.png"
+theme.titlebar_maximized_button_focus_active    = theme.default_dir.."/titlebar/maximized_focus_active.png"
+
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = true
 theme.useless_gap                               = dpi(4)
@@ -160,21 +182,22 @@ local spotifywidget = spotify_widget({
     play_icon = theme.icon_spotify_play,
     pause_icon = theme.icon_spotify_pause,
     max_length = 60,
-    show_tooltip = false
+    show_tooltip = true
 })
 
 --Logout
 local logoutwidget = logout_menu_widget()
 
 --Battery
-local batterywidget = battery_widget({
+local batterywidget = batteryarc_widget({
     font = theme.font,
-    path_to_icons = theme.battery_dir,
     show_current_level = true,
+    arc_thickness = 1,
+    size = 20,
 })
 
 -- ALSA volume bar
-local volume_icon = wibox.widget.imagebox(theme.vol)
+local volume_icon = wibox.widget.imagebox(theme.icon_volume)
 theme.volume = lain.widget.alsabar({
     notification_preset = { font = theme.font},
     --togglechannel = "IEC958,3",
@@ -276,7 +299,6 @@ function theme.at_screen_connect(s)
     --]]
 
     --{{ With icons
-
         for i,v in ipairs(tags.icons) do
             awful.tag.add( "", {
                 icon = v,
@@ -343,12 +365,11 @@ function theme.at_screen_connect(s)
             clock_icon,
             clockwidget,
             bar,
-            --[[ Info bateria para Notebooks
-            batterywidget,
-            bar,
-            --]]
+            spr_empty,
+            --batterywidget,
             spr_empty,
             logoutwidget,
+            spr_empty,
             spr_empty,
         },
     }
@@ -384,7 +405,6 @@ function theme.at_screen_connect(s)
             netup_icon,
 	        bar,
             spr_empty,
-            
         },
     }
 end
