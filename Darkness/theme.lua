@@ -25,7 +25,7 @@ theme.default_dir                               = require("awful.util").get_them
 theme.icon_dir                                  = os.getenv("HOME") .. "/.config/awesome/Darkness/icons"
 theme.widget_dir                                = theme.icon_dir .. "/widget"
 theme.layout_dir                                = theme.icon_dir .. "/layout"
-theme.tag_dir                                   = theme.icon_dir .. "/tag"
+theme.taglist_dir                                   = theme.icon_dir .. "/taglist"
 theme.battery_dir                               = theme.icon_dir .. "/battery"
 
 -- Wallpaper
@@ -86,12 +86,12 @@ theme.icon_net_up                               = theme.widget_dir .. "/net_up.s
 theme.icon_net_down                             = theme.widget_dir .. "/net_down.svg"
 
 -- Taglist icons
-theme.tag_term                                  = theme.tag_dir .. "/terminal.svg"
-theme.tag_dev                                   = theme.tag_dir .. "/dev.svg"
-theme.tag_docs                                  = theme.tag_dir .. "/docs.svg"
-theme.tag_web                                   = theme.tag_dir .. "/web.svg"
-theme.tag_music                                 = theme.tag_dir .. "/music.svg"
-theme.tag_other                                 = theme.tag_dir .. "/other.svg"
+theme.tag_term                                  = theme.taglist_dir .. "/terminal.svg"
+theme.tag_dev                                   = theme.taglist_dir .. "/dev.svg"
+theme.tag_docs                                  = theme.taglist_dir .. "/docs.svg"
+theme.tag_web                                   = theme.taglist_dir .. "/web.svg"
+theme.tag_music                                 = theme.taglist_dir .. "/music.svg"
+theme.tag_other                                 = theme.taglist_dir .. "/other.svg"
 
 -- Layouts icons
 theme.layout_tile                               = theme.layout_dir .. "/tile.png"
