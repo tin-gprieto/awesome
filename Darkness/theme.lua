@@ -25,7 +25,7 @@ theme.default_dir                               = require("awful.util").get_them
 theme.icon_dir                                  = os.getenv("HOME") .. "/.config/awesome/Darkness/icons"
 theme.widget_dir                                = theme.icon_dir .. "/widget"
 theme.layout_dir                                = theme.icon_dir .. "/layout"
-theme.taglist_dir                                   = theme.icon_dir .. "/taglist"
+theme.taglist_dir                               = theme.icon_dir .. "/taglist"
 theme.battery_dir                               = theme.icon_dir .. "/battery"
 
 -- Wallpaper
@@ -189,12 +189,14 @@ local spotifywidget = spotify_widget({
 local logoutwidget = logout_menu_widget()
 
 --Battery
+--[[
 local batterywidget = batteryarc_widget({
     font = theme.font,
     show_current_level = true,
     arc_thickness = 1,
     size = 20,
 })
+--]]
 
 -- ALSA volume bar
 local volume_icon = wibox.widget.imagebox(theme.icon_volume)
