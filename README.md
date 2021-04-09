@@ -63,16 +63,22 @@ Libreria de widgets: https://github.com/streetturtle/awesome-wm-widgets
 
 - Alinear e independizar Spotify widget
 
+- Agregar información a widgets (Ventanas al pasar el mouse)
+
+- Sincronizar widget calendario con Google Calendar
+
 ### Agregar 
 
-- Run shell widget
+- Run shell widget (nuevo)
 
 - Widget del porcentaje ocupado del disco (top wibox)
 
 ### Arreglar
 
-- Arreglar widget de temperatura del procesador
+- widget de temperatura del procesador
 
-- Arreglar widget de bateria (notificación alerta en PC)
+- widget battery
+
+- Traducir widgets
 
 
