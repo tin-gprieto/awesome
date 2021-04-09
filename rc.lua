@@ -36,9 +36,11 @@ local ctrlkey      = "Control"
 local shiftkey     = "Shift"
 --Programs
 local terminal     = "x-terminal-emulator"
-local editor       = os.getenv("EDITOR") or "vim"
-local gui_editor   = os.getenv("GUI_EDITOR") or "gvim"
-local browser      = os.getenv("BROWSER") or "firefox"
+local editor       = os.getenv("EDITOR") or "emacs"
+local gui_editor   = os.getenv("GUI_EDITOR") or "vim"
+local browser      = os.getenv("BROWSER") or "opera"
+local music        = os.getenv("MUSIC") or "spotify"
+local file_manager = os.getenv("FILE_MANAGER") or "nautilus"
 local scrlocker    = "slock"
 --??
 local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awesome-copycats/issues/275
@@ -425,6 +427,12 @@ globalkeys = my_table.join(
     -- User programs
     awful.key({ modkey }, "q", function () awful.spawn(browser) end,
               {description = "run browser", group = "launcher"}),
+    awful.key({ modkey }, "e", function () awful.spawn(editor) end,
+              {description = "run spotify", group = "launcher"}),
+    awful.key({ modkey, ctrlkey }, "s", function () awful.spawn(music) end,
+              {description = "run file manager", group = "launcher"}),
+    awful.key({ modkey, ctrlkey }, "d", function () awful.spawn(file_manager) end,
+              {description = "run editor", group = "launcher"}),
     awful.key({ modkey }, "a", function () awful.spawn(gui_editor) end,
               {description = "run gui editor", group = "launcher"}),
     -- Prompt
