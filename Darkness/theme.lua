@@ -29,7 +29,7 @@ theme.taglist_dir                               = theme.icon_dir .. "/taglist"
 theme.battery_dir                               = theme.icon_dir .. "/battery"
 
 -- Wallpaper
-theme.wallpaper                                 = os.getenv("HOME") .. "/.config/awesome/Darkness/wallpapers/abstract.png"
+theme.wallpaper                                 = os.getenv("HOME") .. "/.config/awesome/Darkness/wallpapers/default.png"
 
 -- Fonts
 theme.font                                      = "Roboto Bold 10"

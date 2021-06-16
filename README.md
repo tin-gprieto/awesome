@@ -40,9 +40,15 @@ Libreria de widgets: https://github.com/streetturtle/awesome-wm-widgets
 
     cd ~/.config
     git clone --recursive https://github.com/tin-gprieto/awesome
-    
+
+## Configuración para laptops
+
+Para poder disponer del indicador de bateria (el cual brinda información de su carga), se debe ingresar a **Darkness/theme.lua**, y dentro de archivo, al final y en la sección **Add widgets to the top wibox** específicamente en **Right widgets**, y descomentar la linea **"--baterrywidget"**, es decir, quitarle "--".  
+
 ## Customización
  
+- **Wallpaper** : Darkness/wallpapers/default.png (Se puede cambiar por otro que mantenga el mismo nombre)
+
 - **Íconos** : Darkness/icons
 
 - **Tema** : Darkness/theme.lua
@@ -65,7 +71,7 @@ Libreria de widgets: https://github.com/streetturtle/awesome-wm-widgets
 
 - Agregar información a widgets (Ventanas al pasar el mouse)
 
-- Sincronizar widget calendario con Google Calendar
+- Sincronizar widget calendario con Google Calendar (onclick)
 
 ### Agregar 
 
@@ -79,6 +85,5 @@ Libreria de widgets: https://github.com/streetturtle/awesome-wm-widgets
 
 - widget battery
 
-- Traducir widgets
 
 

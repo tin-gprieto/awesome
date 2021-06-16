@@ -36,7 +36,7 @@ local ctrlkey      = "Control"
 local shiftkey     = "Shift"
 --Programs
 local terminal     = "x-terminal-emulator"
-local editor       = os.getenv("EDITOR") or "emacs"
+local editor       = os.getenv("EDITOR") or "code"
 local gui_editor   = os.getenv("GUI_EDITOR") or "vim"
 local browser      = os.getenv("BROWSER") or "opera"
 local music        = os.getenv("MUSIC") or "spotify"
@@ -428,11 +428,11 @@ globalkeys = my_table.join(
     awful.key({ modkey }, "q", function () awful.spawn(browser) end,
               {description = "run browser", group = "launcher"}),
     awful.key({ modkey }, "e", function () awful.spawn(editor) end,
-              {description = "run spotify", group = "launcher"}),
-    awful.key({ modkey, ctrlkey }, "s", function () awful.spawn(music) end,
-              {description = "run file manager", group = "launcher"}),
-    awful.key({ modkey, ctrlkey }, "d", function () awful.spawn(file_manager) end,
               {description = "run editor", group = "launcher"}),
+    awful.key({ modkey, ctrlkey }, "s", function () awful.spawn(music) end,
+              {description = "run Spotify", group = "launcher"}),
+    awful.key({ modkey, ctrlkey }, "d", function () awful.spawn(file_manager) end,
+              {description = "run file manager", group = "launcher"}),
     awful.key({ modkey }, "a", function () awful.spawn(gui_editor) end,
               {description = "run gui editor", group = "launcher"}),
     -- Prompt
