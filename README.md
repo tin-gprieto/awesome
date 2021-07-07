@@ -108,6 +108,15 @@ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.t
         )
         Reiniciar terminal       
 
+- Colores de los directorios
+
+        $ nvim (o vim) ~/.zshrc
+Agregar:
+        export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
+Guardar y reiniciar terminal
+
+Pd. Problema con el color de los archivos y ejecutables (ambos de color verde) pero soluciona las carpetas resaltadas con verde
+
 **Configuración personal**
 
 - Prompt style: Classic
@@ -179,17 +188,19 @@ En Grub Customizer:
 
 ### Mejorar
 
-- Modificar Menú Awesome (en contenido y en formato)
+- Modificar Menú Awesome (en contenido y en formato) Idea: Desplegable desde un costado con el contenido bien distribuido
 
-- Mezclador de volúmen
+- Mezclador de volúmen (como en Windows)
 
 - Modificar wibox en general (bordes y fondo)
 
-- Alinear e independizar Spotify widget
+- Alinear e independizar Spotify widget (se corre cuando se ejecuta prompt)
 
-- Agregar información a widgets (Ventanas al pasar el mouse)
+- Agregar información a widgets (Ventanas al pasar el mouse, como en widgets externos)
 
 - Sincronizar widget calendario con Google Calendar (onclick)
+
+- Separar Widgets en una carpeta por separado (incluyendo los de libreria externa)
 
 ### Agregar 
 
