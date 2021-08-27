@@ -76,21 +76,20 @@ Luego modifica el archivo con:
         $ sudo apt install zsh
         $ chsh -s $(which zsh)
         Reiniciar sesión, abrir terminal y seleccionar:
-        (2)  Populate your ~/.zshrc with the configuration recommended by the system administrator and exit (you will need to edit the file by hand, if so desired).
+        Seleccionar => (2)  Populate your ~/.zshrc with the configuration recommended by the system administrator and exit (you will need to edit the file by hand, if so desired).
 
 #### ZSH Theme
 
 - Ohmyzsh
-
+        ($ sudo apt install curl)
         $ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 Archivo de configuración: ~/.zshrc
 
 - Powerlevel10k
 
-        $ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-        $ echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >>! ~/.zshrc
-        Reiniciar terminal y configurar ($ p10k configure)
+        $ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+        $ echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 
 - MesloLGS Font
 
