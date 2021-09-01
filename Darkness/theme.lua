@@ -32,7 +32,7 @@ theme.battery_dir                               = theme.icon_dir .. "/battery"
 theme.wallpaper                                 = os.getenv("HOME") .. "/.config/awesome/Darkness/wallpapers/default.png"
 
 -- Fonts
-theme.font                                      = "Roboto Bold 10"
+theme.font                                      = "Roboto Bold 14"
 theme.calendar_font                             = "Monospace 10"
 theme.taglist_font                              = "Roboto Condensed Regular 10"
 
@@ -51,10 +51,11 @@ theme.border_focus                              = "#0099CC"
 theme.taglist_fg_focus                          = "#dfdfdfff"
 theme.tasklist_bg_normal                        = "#222222"
 theme.tasklist_fg_focus                         = "#4CB7DB"
+
 -- Menu dimesions
 theme.menu_height                               = dpi(20)
 theme.menu_width                                = dpi(160)
-theme.menu_icon_size                            = dpi(32)
+theme.menu_icon_size                            = dpi(16)
 
 --Awesome icons
 theme.awesome_icon                              = theme.icon_dir .. "/awesome_icon_white.png"
@@ -331,7 +332,7 @@ function theme.at_screen_connect(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons, { bg_focus = theme.bg_focus, shape = gears.shape.rectangle, shape_border_width = 5, shape_border_color = theme.tasklist_bg_normal, align = "center" })
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(32) })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(34) })
 
     -- Add widgets to the top wibox
     s.mywibox:setup {
