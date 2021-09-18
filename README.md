@@ -100,7 +100,7 @@ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.t
 
         $ cd ~/.oh-my-zsh/custom/plugins
         $ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-        $ nvim ~/.zshrc
+        $ vim ~/.zshrc
         Add
         plugins=( 
                 zsh-autosuggestions
@@ -109,7 +109,7 @@ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.t
 
 - Colores de los directorios
 
-        $ nvim (o vim) ~/.zshrc
+        $ vim ~/.zshrc
 Agregar:
         export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 Guardar y reiniciar terminal
@@ -152,7 +152,7 @@ Pd. Problema con el color de los archivos y ejecutables (ambos de color verde) p
         $ sudo apt-get install gtk2-engines-murrine gtk2-engines-pixbuf
         $ git clone https://github.com/vinceliuice/Qogir-theme.git
         $ cd Qogir-theme/
-        $ ./install.sh -l ubuntu -t standard -c dark
+        $ sudo ./install.sh -l ubuntu -t standard -c dark
 #### Tela Icon Pack
         $ sudo snap install tela-icons
 
