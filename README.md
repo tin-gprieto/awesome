@@ -19,31 +19,31 @@ Libreria de widgets: https://github.com/streetturtle/awesome-wm-widgets
 
 - **Awesome WM** 
 
-        $ sudo apt install awesome
+        sudo apt install awesome
  
 - **ACPI modules**
 
-        $ sudo apt-get install acpi
+        sudo apt-get install acpi
 
 - **Spotify client** 
 
-        $ git clone https://gist.github.com/fa6258f3ff7b17747ee3.git
-        $ cd ./fa6258f3ff7b17747ee3 
-        $ chmod +x sp
-        $ sudo cp ./sp /usr/local/bin/
+        git clone https://gist.github.com/fa6258f3ff7b17747ee3.git
+        cd ./fa6258f3ff7b17747ee3 
+        chmod +x sp
+        sudo cp ./sp /usr/local/bin/
 
 - **lxappearance (Gestor de gtk themes)** 
 
-        $ sudo apt-get install -y lxappearance
+        sudo apt-get install -y lxappearance
 
 - **fonts** 
 
-        $ sudo apt-get install fonts-roboto
+        sudo apt-get install fonts-roboto
 
 ## Instalación
 
-    $ cd ~/.config
-    $ git clone --recursive https://github.com/tin-gprieto/awesome
+    cd ~/.config
+    git clone --recursive https://github.com/tin-gprieto/awesome
 
 ## Configuración para laptops
 
@@ -61,8 +61,9 @@ Para poder disponer del indicador de bateria (el cual brinda información de su 
 
 - **Resolución**:
 
-        $ touch ~/.Xresources
-        $ nano ~/.Xresources
+        touch ~/.Xresources
+        nano ~/.Xresources
+
 Luego modifica el archivo con:
         "Xft.dpi: [...]"
         ex. "Xft.dpi: 100"
